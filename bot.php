@@ -10,6 +10,7 @@ $chatId = $updateArray['message']['chat']['id'];
 $message = $updateArray['message']['text'];
 
 $url_mini = "https://bot-test.ir/test_mini.html";
+
 $keyboard = [
     "inline_keyboard" => [
         [["text" => "🖥 باز کردن مینی‌اپ", "web_app" => ["url" =>$url_mini]]]
@@ -20,6 +21,7 @@ if($message =="/start"){
     sendMessage($chatId,"چی مخی؟");
 }
 if($message =="mini"){
+    
     sendMessageWithKeyboard($chatId,"بگیر",$keyboard);
 }
 

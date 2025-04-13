@@ -15,15 +15,39 @@
 <body>
 
     <label for="datepicker">تاریخ را انتخاب کنید:</label>
-   
+    <input type="text" id="datepicker" class="example1" />
+    <button id="sendDate">ارسال تاریخ</button>
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $(".example1").pDatepicker();
+            $(".example1").pDatepicker();
+
+            // گرفتن chat_id از URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const chatId = urlParams.get('chat_id');
+
+            // کلیک روی دکمه و ارسال تاریخ
+            $("#sendDate").click(function() {
+                let selectedDate = $("#datepicker").val();
+                if (!selectedDate) {
+                    alert("لطفا یک تاریخ انتخاب کنید!");
+                    return;
+                }
+
+                if (!chatId) {
+                    alert("خطا: chat_id دریافت نشد!");
+                    return;
+                }
+
+                $.post("bot.php", {
+                    chat_id: chatId,
+                    date: selectedDate
+                }, function(response) {
+                    alert("تاریخ با موفقیت ارسال شد!");
+                });
+            });
         });
-      </script>
-      
-      <input type="text" class="example1" />
+    </script>
 
 </body>
 </html>
